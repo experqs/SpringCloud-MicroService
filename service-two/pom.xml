@@ -13,6 +13,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.dzc</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <!-- 引入Mybatis依赖（需配置数据库连接信息，不能仅引入而不配置） -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -35,5 +41,14 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
