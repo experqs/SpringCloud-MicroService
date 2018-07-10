@@ -17,14 +17,14 @@ public class ControllerTwo {
     @Autowired
     private ServiceTwo serviceTwo;
 
-    @ApiOperation(value = "Home Page", notes = "首页")
+    @ApiOperation(value = "Home Page", notes = "首页", response = Result.class)
     @GetMapping("/")
     public Result homepage() {
         String str = "ServiceTwo Home Page.";
         return ResultUtil.success(str);
     }
 
-    @ApiOperation(value = "向用户打招呼", notes = "传入用户Id，打招呼")
+    @ApiOperation(value = "向用户打招呼", notes = "传入用户Id，打招呼", response = Result.class)
     @GetMapping("/hello")
     public Result hello(@RequestParam(value = "id", required = false) Integer id) {
         return ResultUtil.success(serviceTwo.hello(id));
