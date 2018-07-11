@@ -5,9 +5,6 @@ import com.dzc.servicetwo.service.ServiceTwo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by Administrator on 2018/7/6.
- */
 @Service
 public class ServiceTwoImpl implements ServiceTwo {
 
