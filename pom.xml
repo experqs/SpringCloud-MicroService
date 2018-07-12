@@ -12,6 +12,7 @@
 		<module>common</module>
 		<module>service-one</module>
 		<module>service-two</module>
+		<module>eureka-server</module>
 	</modules>
 
 	<parent>

@@ -3,15 +3,17 @@ package com.dzc.serviceone;
 import com.dzc.common.util.RestTemplateUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
+@EnableEurekaClient
 @EnableFeignClients
 @SpringBootApplication
 public class ServiceOneApplication {
 
     /**
-     * 在本模块启动时，向Spring IoC注入一个 RestTemplate工具的实例化 的Bean，以供模块内部使用
+     * 在本模块启动时，向Spring IoC容器注入一个 RestTemplate工具的实例化Bean，以供模块内部使用
      */
     @Bean
     public RestTemplateUtil restTemplateUtil() {
