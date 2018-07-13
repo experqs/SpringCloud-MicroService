@@ -6,4 +6,6 @@ public interface ServiceOne {
 
     Result getStock(String stock);
 
+    Result helloServiceTwoRestTemplate(Integer id);
+
 }

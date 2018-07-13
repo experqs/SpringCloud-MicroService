@@ -3,9 +3,11 @@ package com.dzc.serviceone;
 import com.dzc.common.util.RestTemplateUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @EnableEurekaClient
 @EnableFeignClients
@@ -18,6 +20,17 @@ public class ServiceOneApplication {
     @Bean
     public RestTemplateUtil restTemplateUtil() {
         return new RestTemplateUtil();
+    }
+
+    /**
+     * 再注入一个原生的RestTemplate实例
+     *
+     * @LoadBalanced 表示这个RestTemplate实例开启了Ribbon的负载均衡功能（在消费内部服务时负载均衡才有效）
+     */
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
     public static void main(String[] args) {

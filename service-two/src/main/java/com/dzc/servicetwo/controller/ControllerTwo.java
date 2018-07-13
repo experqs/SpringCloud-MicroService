@@ -6,6 +6,7 @@ import com.dzc.servicetwo.service.ServiceTwo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +18,13 @@ public class ControllerTwo {
     @Autowired
     private ServiceTwo serviceTwo;
 
+    @Value("${spring.cloud.client.ipAddress}" + ":" + "${server.port}")
+    private String serverAddress;
+
     @ApiOperation(value = "Home Page", notes = "首页", response = Result.class)
     @GetMapping("/")
     public Result homepage() {
-        String str = "ServiceTwo Home Page.";
+        String str = "ServiceTwo Home Page. By " + serverAddress;
         return ResultUtil.success(str);
     }
 
