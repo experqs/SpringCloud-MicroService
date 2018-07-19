@@ -23,6 +23,11 @@ public class ServiceTwoImpl implements ServiceTwo {
 
     @Override
     public String hello(Integer id) {
+        try {
+            Thread.sleep(3000);     // 模拟耗时
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (id == null) {
             return "Hello! This is ServiceTwo! By " + serverAddress;
         }
