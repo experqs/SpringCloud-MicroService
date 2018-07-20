@@ -10,14 +10,21 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * ServiceOne入口启动类
+ *
+ * @EnableEurekaClient 开启向注册中心Eureka进行服务注册
+ * @EnableFeignClients 启用Feign客户端
+ * @EnableHystrix 开启Hystrix熔断器功能
+ */
 @EnableHystrix
-@EnableEurekaClient
 @EnableFeignClients
+@EnableEurekaClient
 @SpringBootApplication
 public class ServiceOneApplication {
 
     /**
-     * 在本模块启动时，向Spring IoC容器注入一个 封装过的RestTemplate的实例Bean，以供模块内部使用
+     * 在本服务模块启动时，向Spring IoC容器注入一个 封装过的RestTemplate的实例Bean，以供模块内部使用
      */
     @Bean
     public RestTemplateUtil restTemplateUtil() {

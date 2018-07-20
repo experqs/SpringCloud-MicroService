@@ -48,10 +48,10 @@ public class ServiceOneImpl implements ServiceOne {
      * 这里用的服务名替代了具体的url地址，Ribbon会根据服务名来选择具体的服务实例（若实例有多个，则轮询使用，实现负载均衡），并使用具体的url替换掉服务名
      * （如果不启用@LoadBalanced，则无法把服务名替换为url地址）
      *
-     * @HystrixCommand 指定了当消费内部、外部服务过程中因超时等原因而出错时，备用的fallback方法
+     * @HystrixCommand 指定了当消费内部、外部服务过程中因超时等原因而出错时，回退所用的fallback方法
      */
     @Override
-    @HystrixCommand(fallbackMethod = "helloServiceTwoError")
+    @HystrixCommand(fallbackMethod = "helloServiceTwoByHystrix")
     public Result helloServiceTwoRestTemplate(Integer id) {
         String url = "http://service-two/hello";
         if (id != null) {
@@ -64,13 +64,13 @@ public class ServiceOneImpl implements ServiceOne {
     }
 
     /**
-     * 当消费内部、外部服务过程中因超时等原因而出错时，备用的fallback方法
+     * 当消费内部、外部服务过程中因超时等原因而出错时，回退所用的fallback方法
      * （该方法的 入参、返回值类型 需与原方法一致）
      * @param id
      * @return
      */
-    public Result helloServiceTwoError(Integer id) {
-        System.out.println("消费ServiceTwo出错，启动熔断降级！");
-        return ResultUtil.fail("消费ServiceTwo出错，这是来自fallback方法的返回！");
+    public Result helloServiceTwoByHystrix(Integer id) {
+        System.out.println("RestTemplate消费ServiceTwo出错，启动熔断降级！");
+        return ResultUtil.fail("RestTemplate在消费ServiceTwo时出现熔断，这是来自Hystrix的降级处理！");
     }
 }
