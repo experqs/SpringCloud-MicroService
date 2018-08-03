@@ -34,4 +34,22 @@ public class ControllerTwo {
         return ResultUtil.success(serviceTwo.hello(id));
     }
 
+    @ApiOperation(value = "access limit, wait until available", notes = "服务器限流，客户端保持等候直到返回结果")
+    @GetMapping("/accessWait")
+    public Result accessWait(@RequestParam(value = "id", required = false) Integer id) {
+        return serviceTwo.accessWait(id);
+    }
+
+    @ApiOperation(value = "access limit, respond immediately", notes = "服务器限流，客户端希望即时返回结果")
+    @GetMapping("/accessNow")
+    public Result accessNow(@RequestParam(value = "id", required = false) Integer id) {
+        return serviceTwo.accessNow(id);
+    }
+
+    @ApiOperation(value = "access limit, respond within some time", notes = "服务器限流，客户端希望在一定时间内返回结果")
+    @GetMapping("/accessSomeTime")
+    public Result accessSomeTime(@RequestParam(value = "id", required = false) Integer id) {
+        return serviceTwo.accessSomeTime(id);
+    }
+
 }

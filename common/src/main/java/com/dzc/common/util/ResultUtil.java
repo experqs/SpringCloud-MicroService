@@ -9,7 +9,7 @@ import com.dzc.common.model.Result;
 public class ResultUtil {
 
     /**
-     * 返回200成功
+     * 返回 200 成功
      * @param data
      * @return
      */
@@ -22,7 +22,7 @@ public class ResultUtil {
     }
 
     /**
-     * 返回500失败
+     * 返回 500 失败（Server Error）
      * @param data
      * @return
      */
@@ -35,7 +35,20 @@ public class ResultUtil {
     }
 
     /**
-     * 返回401unauthorized
+     * 返回 503 服务器过载（Unavailable）
+     * @param data
+     * @return
+     */
+    public static Result unavailable(Object data) {
+        Result<Object> result = new Result<>();
+        result.setCode(HttpStatus.UNAVAILABLE.getCode());
+        result.setMsg(HttpStatus.UNAVAILABLE.getMsg());
+        result.setData(data);
+        return result;
+    }
+
+    /**
+     * 返回 401 unauthorized
      * @param data
      * @return
      */
@@ -48,7 +61,7 @@ public class ResultUtil {
     }
 
     /**
-     * 返回403forbidden
+     * 返回 403 forbidden
      * @param data
      * @return
      */
@@ -61,7 +74,7 @@ public class ResultUtil {
     }
 
     /**
-     * 返回404notFound
+     * 返回 404 notFound
      * @param data
      * @return
      */
