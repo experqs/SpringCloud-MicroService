@@ -46,6 +46,18 @@
             <artifactId>spring-cloud-starter-hystrix</artifactId>
         </dependency>
 
+        <!-- 运行健康情况监控（包括Hystrix情况） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Hystrix熔断器 图形化监控 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

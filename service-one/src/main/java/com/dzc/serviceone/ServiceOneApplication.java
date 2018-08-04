@@ -7,6 +7,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,7 +17,11 @@ import org.springframework.web.client.RestTemplate;
  * @EnableEurekaClient 开启向注册中心Eureka进行服务注册
  * @EnableFeignClients 启用Feign客户端
  * @EnableHystrix 开启Hystrix熔断器功能
+ *      Hystrix的文本流监控地址 http://localhost:${port}/hystrix.stream （需先引入spring-boot-starter-actuator）
+ * @EnableHystrixDashboard 开启Hystrix熔断器的图形化监控
+ *      Hystrix的图形化监控地址 http://localhost:${port}/hystrix （填入文本流监控地址）
  */
+@EnableHystrixDashboard
 @EnableHystrix
 @EnableFeignClients
 @EnableEurekaClient
