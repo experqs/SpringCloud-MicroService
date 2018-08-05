@@ -37,8 +37,9 @@ public class ServiceTwoImpl implements ServiceTwo {
 
     @Override
     public String hello(Integer id) {
+        int randomTime = (int)(Math.random() * 1000);   // 产生一个区间为[0,1000)的随机整数
         try {
-            Thread.sleep(3000);     // 模拟耗时
+            Thread.sleep(2000 + randomTime);     // 模拟耗时 2~3 秒
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

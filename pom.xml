@@ -13,6 +13,7 @@
 		<module>service-one</module>
 		<module>service-two</module>
 		<module>eureka-server</module>
+		<module>hystrix-dashboard-turbine</module>
 	</modules>
 
 	<parent>
