@@ -17,8 +17,9 @@ import org.springframework.web.client.RestTemplate;
  * @EnableEurekaClient 开启向注册中心Eureka进行服务注册
  * @EnableFeignClients 启用Feign客户端
  * @EnableHystrix 开启Hystrix熔断器功能
- *     Hystrix的监控日志输出地址 http://localhost:${port}/hystrix.stream （需先引入spring-boot-starter-actuator）
- * @EnableHystrixDashboard 开启Hystrix熔断器的图形化监控，即 hystrix-dashboard
+ *     另外：引入spring-boot-starter-actuator后，可以在下面的地址查看Hystrix的监控日志（文本）
+ *     http://localhost:${port}/hystrix.stream
+ * @EnableHystrixDashboard 开启本服务的Hystrix熔断器的图形化监控（同样需先引入spring-boot-starter-actuator）
  *     Hystrix的图形化监控地址 http://localhost:${port}/hystrix （在Web界面上填入上面的监控日志输出地址）
  */
 @EnableHystrixDashboard

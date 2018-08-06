@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * 在 Feign 上使用 Hystrix 熔断器功能：
  * 由于Feign是以接口形式工作的，没有具体方法的实现，无法通过@HystrixCommand注解的fallbackMethod属性来指定当发生熔断时的fallback方法；
- * 需要配置feign.hystrix.enabled=true，并通过@FeignClient注解的fallback属性来指定当发生熔断时的fallback实现类（这个类需实现当前Feign接口）。
+ *     1、启动类需加上@EnableHystrix注解，且在配置文件中指定 feign.hystrix.enabled=true ；
+ *     2、本接口加上注解@FeignClient，并通过fallback属性来指定当发生熔断时的fallback实现类（这个类需实现当前Feign接口）。
  */
 @FeignClient(value = "service-two", fallback = FeignFallbackByHystrix.class)
 public interface FeignClientToServiceTwo {

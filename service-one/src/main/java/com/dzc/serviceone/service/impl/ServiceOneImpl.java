@@ -49,6 +49,7 @@ public class ServiceOneImpl implements ServiceOne {
      * （如果不启用@LoadBalanced，则无法把服务名替换为url地址）
      *
      * @HystrixCommand 指定了当消费内部、外部服务过程中因超时等原因而出错时，回退所用的fallback方法
+     *     （需在启动类加注解 @EnableHystrix 来激活熔断降级功能）
      */
     @Override
     @HystrixCommand(fallbackMethod = "helloServiceTwoByHystrix")
@@ -65,11 +66,11 @@ public class ServiceOneImpl implements ServiceOne {
 
     /**
      * 当消费内部、外部服务过程中因超时等原因而出错时，回退所用的fallback方法
-     * （该方法的 入参、返回值类型 需与原方法一致）
+     * （该方法的 入参、返回值类型 需与原方法一致；但方法的作用范围如public、private，则允许不同）
      * @param id
      * @return
      */
-    public Result helloServiceTwoByHystrix(Integer id) {
+    private Result helloServiceTwoByHystrix(Integer id) {
         System.out.println("RestTemplate消费ServiceTwo出错，启动熔断降级！");
         return ResultUtil.fail("RestTemplate在消费ServiceTwo时出现熔断，这是来自Hystrix的降级处理！");
     }

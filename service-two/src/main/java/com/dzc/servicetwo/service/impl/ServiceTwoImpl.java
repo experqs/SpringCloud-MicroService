@@ -37,9 +37,9 @@ public class ServiceTwoImpl implements ServiceTwo {
 
     @Override
     public String hello(Integer id) {
-        int randomTime = (int)(Math.random() * 1000);   // 产生一个区间为[0,1000)的随机整数
+        int randomTime = (int)(Math.random() * 1000);   // 产生一个区间为 [0,1000) 的随机整数
         try {
-            Thread.sleep(2000 + randomTime);     // 模拟耗时 2~3 秒
+            Thread.sleep(1000 + randomTime);     // 模拟耗时 1~2 秒
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -62,11 +62,11 @@ public class ServiceTwoImpl implements ServiceTwo {
     public Result accessNow(Integer id) {
         // 判断能否即时获得令牌，若能则立即返回true；若不能则立即返回false（不会阻塞线程）
         if (!accessLimitService.tryAcquire()) {
-            String resultString = "此时此刻服务器没有可用资源，即时返回结果给客户端。";
+            String resultString = "服务器在当前时刻没有可用资源，即时返回结果给客户端。";
             System.out.println(resultString);
             return ResultUtil.unavailable(resultString);
         }
-        System.out.println("此时此刻服务器有令牌。");
+        System.out.println("当前时刻服务器有令牌。");
         return ResultUtil.success(helloDao(id));
     }
 
