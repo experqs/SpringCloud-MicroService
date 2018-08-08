@@ -42,5 +42,5 @@
     
     - Swagger2  接口文档生成器，使RESTful接口可视化
     
-    - Lombok  POJO类的代码辅助工具
+    - Lombok  POJO类的代码辅助工具（需IDE安装插件支持）
 
