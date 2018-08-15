@@ -2,10 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dzc.servicetwo.dao.ExampleDao">
 
+    <!-- 通过用户ID查询用户名 -->
     <select id="selectNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
         SELECT name
         FROM users
         WHERE id = #{id}
+    </select>
+
+    <!-- 查询多个用户信息 - Step1：先查主键ID -->
+    <select id="listUsersId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT id
+        FROM users
+        <where>
+            <if test="idBegin != null">
+                AND id >= #{idBegin}
+            </if>
+            <if test="idEnd != null">
+                AND <![CDATA[ id <= #{idEnd} ]]>
+            </if>
+        </where>
+        ORDER BY id DESC
+    </select>
+
+    <!-- 查询多个用户信息 - Step2：再根据主键ID查用户信息 -->
+    <!-- FIELD() 使结果按照原ID顺序来输出 -->
+    <select id="listUsersInfo" parameterType="java.lang.Integer" resultType="com.dzc.servicetwo.model.vo.UserVO">
+        SELECT id, name, age
+        FROM users
+        WHERE id IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY FIELD(id,
+            <foreach collection="list" item="item" separator=",">
+                ${item}
+            </foreach>
+        )
     </select>
 
 </mapper>

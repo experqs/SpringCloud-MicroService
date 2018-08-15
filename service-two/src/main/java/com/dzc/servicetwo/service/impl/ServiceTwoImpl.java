@@ -3,11 +3,17 @@ package com.dzc.servicetwo.service.impl;
 import com.dzc.common.model.Result;
 import com.dzc.common.util.ResultUtil;
 import com.dzc.servicetwo.dao.ExampleDao;
+import com.dzc.servicetwo.model.vo.UserVO;
 import com.dzc.servicetwo.service.ServiceTwo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -44,6 +50,24 @@ public class ServiceTwoImpl implements ServiceTwo {
             e.printStackTrace();
         }
         return helloDao(id);
+    }
+
+    @Override
+    public Result helloMany(Integer idBegin, Integer idEnd, int pageNum, int limit) {
+        // 配置分页参数：页码，单页的记录数
+        PageHelper.startPage(pageNum, limit);
+        // 查询第一步：先查主键ID集合
+        PageInfo<Integer> userIdPage = new PageInfo<>(exampleDao.listUsersId(idBegin, idEnd));
+        if (CollectionUtils.isEmpty(userIdPage.getList())) {
+            return ResultUtil.success(new PageInfo<>());
+        }
+        // 查询第二步：再根据主键ID查用户信息
+        List<UserVO> userList = exampleDao.listUsersInfo(userIdPage.getList());
+        PageInfo<UserVO> userInfoPage = new PageInfo<>();
+        // 复制ID集合的分页信息
+        BeanUtils.copyProperties(userIdPage, userInfoPage);
+        userInfoPage.setList(userList);
+        return ResultUtil.success(userInfoPage);
     }
 
     @Override
